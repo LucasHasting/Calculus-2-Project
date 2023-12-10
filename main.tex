@@ -1,0 +1,372 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+
+\title{Calculus 2 Project}
+\author{Lucas Hasting}
+
+\begin{document}
+\date{}
+\maketitle
+
+The spread of a rumor through a population can be modeled using logistic equations. Let y be the fraction of the population that has heard the rumor (so $0 \leq y \leq 1$), and thus $1 - y$ is the fraction of the population that has not. The rumor spreads by interactions between people who know the rumor and those who do not. The equation that models the spread of the rumor is
+\begin{equation*}
+\frac{dy}{dt} = ky(1-y)
+\end{equation*}
+where k is a positive real number.
+
+\section{Question \#1}
+Solve the differential equation for y as a function of t.
+\\ \\ \\
+We start with the separable differential equation
+\begin{equation*}
+\frac{dy}{dt} = ky(1-y)
+\end{equation*}
+
+To separate the variables t and y, we divide both sides by $(1-y)$
+\begin{equation*}
+\frac{dy}{dt(1-y)} = ky
+\end{equation*}
+
+We then divide both sides by y 
+\begin{equation*}
+\frac{dy}{dt(y)(1-y)} = k
+\end{equation*}
+
+We then multiply both sides by dt 
+\begin{equation*}
+\frac{dy}{y(1-y)} = kdt
+\end{equation*}
+
+We now have a setup for integration on both sides
+\begin{equation*}
+\int \frac{1}{y(1-y)}dy = \int kdt
+\end{equation*}
+
+As k is some constant, we can use the power rule for integration
+\begin{equation*}
+\int kdt = kt + C
+\end{equation*}
+
+The next integral is slightly more tricky, we need to use partial fraction decomposition to integrate.
+\begin{equation*}
+\int \frac{1}{y(1-y)}dy = \frac{A}{y} + \frac{B}{1-y}
+\end{equation*}
+
+By simplifying the fraction we get
+\begin{equation*}
+\frac{A}{y} + \frac{B}{1-y} = \frac{A(1-y) + B(y)}{y(1-y)}
+\end{equation*}
+
+By simplifying it further we get
+\begin{equation*}
+\frac{A-Ay + By}{y(1-y)}
+\end{equation*}
+
+We then set the new fraction equal to the original fraction
+\begin{equation*}
+\frac{1}{y(1-y)} = \frac{A-Ay + By}{y(1-y)}
+\end{equation*}
+
+Since the denominators are the same we are able to set the numerators equal to each other to find A and B
+\begin{equation*}
+1 = A - Ay + By
+\end{equation*}
+
+Since A is the only independent variable, we get the following
+\begin{equation*}
+A = 1 
+\end{equation*}
+
+Since there is no y variable in the numerator we can set the following equation
+\begin{equation*}
+0 = - Ay + By
+\end{equation*}
+
+By dividing both sides by y, the equation simplifies to 
+\begin{equation*}
+0 = - A + B
+\end{equation*}
+
+Since we know A is equal to 1, the equation becomes
+\begin{equation*}
+0 = -1 + B
+\end{equation*}
+
+Therefore
+\begin{equation*}
+B = 1
+\end{equation*}
+
+Now we have something we can integrate
+\begin{equation*}
+\int \frac{1}{y(1-y)}dy = \int \frac{1}{y} + \frac{1}{1-y}dy
+\end{equation*}
+
+By using the sum rule, the integral becomes
+\begin{equation*}
+\int \frac{1}{y} + \frac{1}{1-y}dy = \int \frac{1}{y}dy + \int \frac{1}{1-y}dy
+\end{equation*}
+
+The first integral is solved using the derivative of ln(y)
+\begin{equation*}
+\int \frac{1}{y}dy = ln(y) 
+\end{equation*}
+
+To solve the next integral, I will be using u-substitution
+let $u = (1 - y)$ and let $du = -dy$
+\begin{equation*}
+\int \frac{1}{1-y}dy = \int -\frac{1}{u}dy
+\end{equation*}
+
+This can also be solved using the derivative of ln(y) which gives us
+\begin{equation*}
+\int -\frac{1}{u}dy = -ln(u)
+\end{equation*}
+
+By reversing the u-substitution, the equation becomes
+\begin{equation*}
+\int -\frac{1}{u}dy = -ln(1-y)
+\end{equation*}
+
+Therefore the differential equation becomes
+\begin{equation*}
+ln(y) - ln(1-y) = kt + C
+\end{equation*}
+
+Now, we need to solve for y. First I will use the quotient rule for logarithms to make one natural log function
+\begin{equation*}
+ln(\frac{y}{1-y}) = kt + C
+\end{equation*}
+
+Next, I exponentiate both sides by $e$
+\begin{equation*}
+\frac{y}{1-y} = e^{kt + C}
+\end{equation*}
+
+Next, I multiply both sides by $(1 - y)$ to remove the fraction on the left side
+\begin{equation*}
+y = e^{kt + C}(1-y)
+\end{equation*}
+
+I then distrubte the $e^{kt + C}$
+\begin{equation*}
+y = e^{kt + C} - e^{kt + C}y
+\end{equation*}
+
+I then add $e^{kt + C}y$ to both sides  
+\begin{equation*}
+y + e^{kt + C}y = e^{kt + C} 
+\end{equation*}
+
+I then factor out a y from the left side
+\begin{equation*}
+y(1 + e^{kt + C}) = e^{kt + C} 
+\end{equation*}
+
+I divide both sides by $1 + e^{kt + C}$ to finish the differential equation
+\begin{equation*}
+y = \frac{e^{kt + C}}{1 + e^{kt + C}} 
+\end{equation*}
+
+\section{Question \#2}
+Assume UNA has 11,000 students, faculty, and staff on campus. At an 10:00 am Monday faculty meeting, 14 math professors heard a rumor that Chris Hemsworth is going to be in town next month filming a movie. By 1:00 pm on Monday, 10\% of the campus had heard the rumor. When had the rumor spread to 85\% of the campus?
+\\ \\
+Given some initial conditions, we are able to find the constant C in the equation
+\begin{equation*}
+\frac{e^{kt + C}}{1 + e^{kt + C}} 
+\end{equation*}
+
+Since the rumor starts at 10:00 AM, we will let that time be y0, and since 14 staff members heard the rumor, the percentage of the population that has heard the rumor is $\frac{14}{11000}$, so we set our equation equal to that
+\begin{equation*}
+\frac{14}{11000} = \frac{e^0 * e^C}{1 + e^0 * e^C}
+\end{equation*}
+
+Since $e^0 = 1$ The equation can be simplified to 
+\begin{equation*}
+\frac{14}{11000} = \frac{e^C}{1 + e^C}
+\end{equation*}
+
+I then multiply both sides by $1 + e^C$
+\begin{equation*}
+\frac{14+14e^C}{11000} = e^C
+\end{equation*}
+
+I then subtract $e^C$ from both sides
+\begin{equation*}
+\frac{14+14e^C}{11000} - e^C = 0
+\end{equation*}
+
+I then multiple $e^C$ by 11000 so I can get like fractions
+\begin{equation*}
+\frac{14+14e^C}{11000} - \frac{10e^C}{11000} = 0
+\end{equation*}
+
+I then combine the two fractions into 1 fraction
+\begin{equation*}
+\frac{14+14e^C-11000e^C}{11000} = 0
+\end{equation*}
+
+I subtract $11000e^C - 14e^C$
+\begin{equation*}
+\frac{14-10986e^C}{11000} = 0
+\end{equation*}
+
+I multiply both sides by 11000
+\begin{equation*}
+14-10986e^C = 0
+\end{equation*}
+
+I subtract 14 from both sides
+\begin{equation*}
+-10986e^C = -14
+\end{equation*}
+
+I divide both sides by 10986
+\begin{equation*}
+e^C = \frac{14}{10986}
+\end{equation*}
+
+By taking the natural log of both sides we get the constant C
+\begin{equation*}
+C = ln(\frac{14}{10986})
+\end{equation*}
+
+By plugging in the constant C, the equation becomes
+\begin{equation*}
+\Large \frac{e^{kt + ln(\frac{14}{10986})}}{1 + e^{kt + ln(\frac{14}{10986})}} 
+\end{equation*}
+
+Next, I will simplify that equation, using the product rule for exponents
+\begin{equation*}
+\Large \frac{e^{kt} * e^{ln(\frac{14}{10986})}}{1 + e^{kt} * e^{ln(\frac{14}{10986})}} 
+\end{equation*}
+
+By using the inverse property of exponents, the equation becomes
+\begin{equation*}
+\Large \frac{e^{kt} * \frac{14}{10986}}{1 + e^{kt} * \frac{14}{10986}} 
+\end{equation*}
+
+Multiplying and combining like terms turns the equation into
+\begin{equation*}
+\Large \frac{\frac{14e^{kt}}{10986}}{\frac{14e^{kt} + 10986}{10986}} 
+\end{equation*}
+
+Dividing the fractions by each other results in
+\begin{equation*}
+\frac{14e^{kt}}{10986+14e^{kt}} 
+\end{equation*}
+
+Next, we need to find the constant k to have a complete equation. At 1:00 PM, we know that 10\% of the population has heard the rumor. By using minutes, we can let t = 180 minutes or 3 hours. The equation will be set up as:
+\begin{equation*}
+\frac{14e^{180k}}{10986+14e^{180k}} = \frac{1}{10}
+\end{equation*}
+
+Both sides are multiplied by $10986+14e^{180k}$
+\begin{equation*}
+14e^{180k} = \frac{10986+14e^{180k}}{10}
+\end{equation*}
+
+Both sides are multiplied by 10
+\begin{equation*}
+140e^{180k} = 10986+14e^{180k}
+\end{equation*}
+
+$14e^{180k}$ is subtracted from both sides
+\begin{equation*}
+126e^{180k} = 10986
+\end{equation*}
+
+I then divide both sides by 126
+\begin{equation*}
+e^{180k} = \frac{10986}{126}
+\end{equation*}
+
+This simplifies to
+\begin{equation*}
+e^{180k} = \frac{1831}{21}
+\end{equation*}
+
+By taking the natural log of both sides we get 
+\begin{equation*}
+180k = ln(\frac{1831}{21})
+\end{equation*}
+
+To find k, we divide both sides by 180
+\begin{equation*}
+k = \frac{ln(\frac{1831}{21})}{180}
+\end{equation*}
+
+Now that we have k, we have an equation we can use to find when the
+rumor spreads to 85\% of the campus. Assume $k = \frac{ln(\frac{1831}{21})}{180}$ The equation can be set up as:
+\begin{equation*}
+\frac{14e^{kt}}{10986+14e^{kt}} = \frac{17}{20}
+\end{equation*}
+
+Multiply both sides by $10986+14e^{kt}$
+\begin{equation*}
+14e^{kt} = \frac{17(10986+14e^{kt})}{20}
+\end{equation*}
+
+Multiply both sides by 20
+\begin{equation*}
+20(14e^{kt}) = 17(10986+14e^{kt})
+\end{equation*}
+
+Distribute throughout the equation
+\begin{equation*}
+280e^{kt} = 186762+238e^{kt}
+\end{equation*}
+
+Subtract both sides by $238e^{kt}$
+\begin{equation*}
+42e^{kt} = 186762
+\end{equation*}
+
+Divide both sides by 42
+\begin{equation*}
+e^{kt} = \frac{186762}{42}
+\end{equation*}
+
+Take the natural log of both sides
+\begin{equation*}
+kt = ln(\frac{186762}{42})
+\end{equation*}
+
+Plug in the value we found for k
+\begin{equation*}
+\frac{ln(\frac{1831}{21})}{180}t = ln(\frac{186762}{42})
+\end{equation*}
+
+Multiply both sides by 180
+\begin{equation*}
+ln(\frac{1831}{21})t = 180*ln(\frac{186762}{42})
+\end{equation*}
+
+Divide both sides by $ln(\frac{1831}{21})$ to get t
+\begin{equation*}
+t = \frac{180*ln(\frac{186762}{42})}{ln(\frac{1831}{21})}
+\end{equation*}
+
+The approximated value is 338.4 minutes or 5.6 hours
+\begin{equation*}
+t \approx 338.4
+\end{equation*}
+
+Therefore, the rumor will spread to 85\% of campus around 3:36 PM 
+
+\section{Question \#3}
+Use calculus to determine how many of the people on campus will eventually hear this rumor.
+\\ \\
+To determine how many people will eventually hear the rumor we must take the limit of our differential equation as time (t) goes to infinity. Assume $k = \frac{ln(\frac{1831}{21})}{180}$.
+\begin{equation*}
+\lim_{t\to\infty} \frac{14e^{kt}}{10986+14e^{kt}} 
+\end{equation*}
+
+When we evaluate the limit, we only want the values of the highest power. Since kt is the highest power the limit will become:
+\begin{equation*}
+\lim_{t\to\infty} \frac{14e^{kt}}{14e^{kt}} = 1
+\end{equation*}
+
+Therefore, as time approaches infinity, the percentage of people who will hear the rumor is $\frac{1}{1}$ or 100\%
+
+\end{document}
